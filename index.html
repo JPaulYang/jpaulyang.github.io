@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>学术主页 - 计算机科学</title>
+    <title>Academic Homepage - Computer Science</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Crimson+Pro:wght@300;400;600&display=swap" rel="stylesheet">
@@ -34,7 +34,7 @@
             overflow-x: hidden;
         }
 
-        /* 网格背景效果 */
+        /* Grid background effect */
         body::before {
             content: '';
             position: fixed;
@@ -58,12 +58,34 @@
             z-index: 1;
         }
 
-        /* 头部区域 */
+        /* Header area */
         header {
             padding: 5rem 0 4rem;
             border-bottom: 1px solid var(--border);
             margin-bottom: 4rem;
             animation: fadeInUp 0.8s ease-out;
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .header-content {
+            flex: 1;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
         }
 
         h1 {
@@ -90,7 +112,7 @@
         .bio {
             font-size: 1.1rem;
             color: var(--text-secondary);
-            max-width: 650px;
+            max-width: 800px;
             line-height: 1.8;
         }
 
@@ -130,53 +152,28 @@
 
         /* 研究方向 */
         .research-areas {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
             margin-top: 2rem;
         }
 
         .research-card {
-            padding: 2rem;
-            background: var(--secondary-bg);
-            border: 1px solid var(--border);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.1rem;
+            padding: 1rem 1.5rem;
+            background: rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: var(--text-primary);
             transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
-        }
-
-        .research-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 0;
-            background: var(--accent);
-            transition: height 0.3s ease;
-        }
-
-        .research-card:hover::before {
-            height: 100%;
         }
 
         .research-card:hover {
+            background: rgba(59, 130, 246, 0.1);
             border-color: var(--accent);
-            transform: translateX(4px);
-        }
-
-        .research-card h3 {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 0.8rem;
-            color: var(--text-primary);
-        }
-
-        .research-card p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
         }
 
         /* 时间线样式 */
@@ -376,6 +373,13 @@
             header {
                 padding: 3rem 0 2rem;
                 margin-bottom: 3rem;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-photo {
+                width: 150px;
+                height: 150px;
             }
 
             .timeline {
@@ -431,126 +435,127 @@
     </div>
     <div class="container">
         <header>
-            <h1>Jiannan Yang</h1>
-            <div class="subtitle">Computer Science Researcher / PhD Candidate</div>
-            <p class="bio">
-                专注于机器学习与分布式系统的交叉研究，致力于构建高效可靠的大规模智能系统。目前在某某大学攻读博士学位，研究方向包括联邦学习、系统优化与隐私计算。
-            </p>
+            <img src="profile.jpg" alt="Jiannan Yang" class="profile-photo">
+            <div class="header-content">
+                <h1>Jiannan Yang</h1>
+                <div class="subtitle">Computer Science Researcher / Ph.D. Candidate</div>
+                <p class="bio">
+                    I am a Ph.D. candidate in Computer Science at Stony Brook University, working with Prof. Tengfei Ma. I am interested in using advanced mathematical frameworks to understand and improve machine learning methods, with applications in graph representation learning and diffusion models.
+                </p>
+            </div>
         </header>
 
         <section>
-            <h2>研究方向</h2>
+            <h2>Research Areas</h2>
             <div class="research-areas">
-                <div class="research-card">
-                    <h3>机器学习系统</h3>
-                    <p>分布式训练框架、模型压缩与加速、边缘计算</p>
-                </div>
-                <div class="research-card">
-                    <h3>联邦学习</h3>
-                    <p>隐私保护、异构设备协同、通信效率优化</p>
-                </div>
-                <div class="research-card">
-                    <h3>系统安全</h3>
-                    <p>可信计算、差分隐私、对抗鲁棒性</p>
-                </div>
+                <div class="research-card">Graph Neural Networks</div>
+                <div class="research-card">Generative Models</div>
+                <div class="research-card">Optimal Transport</div>
             </div>
         </section>
 
         <section>
-            <h2>教育背景</h2>
+            <h2>Education</h2>
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="timeline-year">2021 - 至今</div>
-                    <div class="timeline-title">计算机科学 博士</div>
-                    <div class="timeline-org">某某大学 计算机学院</div>
-                    <div class="timeline-desc">导师：李教授 | GPA: 3.9/4.0</div>
+                    <div class="timeline-year">2022 - Present</div>
+                    <div class="timeline-title">Ph.D. in Computer Science</div>
+                    <div class="timeline-org">Stony Brook University, Department of Computer Science</div>
+                    <div class="timeline-desc">Advisor: Prof. Tengfei Ma, Co-advised by Prof. Xianfeng Gu | GPA: 3.95/4.0</div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-year">2017 - 2021</div>
-                    <div class="timeline-title">计算机科学与技术 学士</div>
-                    <div class="timeline-org">某某大学</div>
-                    <div class="timeline-desc">优秀毕业生 | GPA: 3.8/4.0</div>
+                    <div class="timeline-year">2019 - 2021</div>
+                    <div class="timeline-title">Master of Mathematical Sciences (with Commendation)</div>
+                    <div class="timeline-org">Australian National University, Mathematical Sciences Institute</div>
+                    <div class="timeline-desc">Advisor: Prof. John Urbas | GPA: 6.94/7.0</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2014 - 2018</div>
+                    <div class="timeline-title">Bachelor of Science (Hons.) in Statistics, Minor in Japanese</div>
+                    <div class="timeline-org">Hong Kong Baptist University</div>
+                    <div class="timeline-desc">Second Class Honours, Division I</div>
                 </div>
             </div>
         </section>
 
         <section>
-            <h2>代表论文</h2>
+            <h2>Publications</h2>
             <ul class="publication-list">
                 <li class="publication-item">
-                    <div class="pub-title">Efficient Federated Learning with Adaptive Communication Strategies</div>
-                    <div class="pub-authors"><strong>Zhang San</strong>, Li Si, Wang Wu</div>
-                    <div class="pub-venue">NeurIPS 2024</div>
-                    <a href="#" class="pub-link">[PDF]</a>
-                    <a href="#" class="pub-link">[Code]</a>
+                    <div class="pub-title">Self-Supervised Learning on Molecular Graphs: A Systematic Investigation of Masking Design</div>
+                    <div class="pub-authors"><strong>Jiannan Yang</strong>, Veronika Thost, Tengfei Ma</div>
+                    <div class="pub-venue">TMLR 2025</div>
+                    <a href="https://arxiv.org/pdf/2512.07064" class="pub-link">[PDF]</a>
+                    <a href="https://github.com/JPaulYang/mask-graph-ssl" class="pub-link">[Code]</a>
                 </li>
                 <li class="publication-item">
-                    <div class="pub-title">Privacy-Preserving Distributed Machine Learning: A Survey</div>
-                    <div class="pub-authors"><strong>Zhang San</strong>, Zhao Liu</div>
-                    <div class="pub-venue">IEEE TPDS 2023</div>
-                    <a href="#" class="pub-link">[PDF]</a>
-                </li>
-                <li class="publication-item">
-                    <div class="pub-title">Accelerating Deep Learning on Edge Devices via Model Compression</div>
-                    <div class="pub-authors">Li Si, <strong>Zhang San</strong>, Chen Qi</div>
-                    <div class="pub-venue">ICML 2023</div>
-                    <a href="#" class="pub-link">[PDF]</a>
-                    <a href="#" class="pub-link">[Code]</a>
+                    <div class="pub-title">Masking in Molecular Graphs Leveraging Reaction Context</div>
+                    <div class="pub-authors"><strong>Jiannan Yang</strong>, Veronika Thost, Tengfei Ma</div>
+                    <div class="pub-venue">ICML 2024 AI4Sci</div>
+                    <a href="https://openreview.net/pdf?id=dCNOsqVKm7" class="pub-link">[PDF]</a>
                 </li>
             </ul>
         </section>
 
         <section>
-            <h2>技能</h2>
+            <h2>Skills</h2>
             <div class="skills">
                 <span class="skill-tag">Python</span>
                 <span class="skill-tag">PyTorch</span>
-                <span class="skill-tag">TensorFlow</span>
-                <span class="skill-tag">C++</span>
-                <span class="skill-tag">Distributed Systems</span>
-                <span class="skill-tag">Docker</span>
-                <span class="skill-tag">Kubernetes</span>
-                <span class="skill-tag">Linux</span>
+                <span class="skill-tag">Mathematical Analysis</span>
+                <span class="skill-tag">Probability Theory</span>
             </div>
         </section>
 
         <section>
-            <h2>联系方式</h2>
+            <h2>Contact</h2>
             <div class="contact-grid">
                 <div class="contact-item">
                     <div class="contact-icon">@</div>
                     <div class="contact-info">
                         <div class="contact-label">Email</div>
-                        <div class="contact-value"><a href="mailto:zhangsan@university.edu">zhangsan@university.edu</a></div>
+                        <div class="contact-value">jiannan.yang [at] stonybrook [dot] edu</div>
                     </div>
                 </div>
                 <div class="contact-item">
                     <div class="contact-icon">#</div>
                     <div class="contact-info">
                         <div class="contact-label">Google Scholar</div>
-                        <div class="contact-value"><a href="#" target="_blank">学术主页</a></div>
+                        <div class="contact-value"><a href="https://scholar.google.com/citations?user=prRflsoAAAAJ&hl=en&authuser=1" target="_blank">Academic Profile</a></div>
                     </div>
                 </div>
                 <div class="contact-item">
                     <div class="contact-icon">&lt;/&gt;</div>
                     <div class="contact-info">
                         <div class="contact-label">GitHub</div>
-                        <div class="contact-value"><a href="#" target="_blank">@zhangsan</a></div>
+                        <div class="contact-value"><a href="https://github.com/JPaulYang" target="_blank">@JPaulYang</a></div>
                     </div>
                 </div>
             </div>
         </section>
 
         <footer>
-            最后更新：2026年1月 | 使用现代Web技术构建
+            <span id="last-updated">Last updated: January 2026</span> | Built with Claude Code
         </footer>
     <script>
-    // 主题切换逻辑
+    // Update last updated date dynamically
+    const lastUpdated = document.getElementById('last-updated');
+    const now = new Date();
+    const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'];
+    const formattedDate = `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+    lastUpdated.textContent = `Last updated: ${formattedDate}`;
+
+    // Theme toggle logic
     const themeToggle = document.getElementById('theme-toggle');
     const slider = document.getElementById('toggle-slider');
     const label = document.getElementById('toggle-label');
     let isDay = false;
-    // 读取本地存储
+
+    // Check if system prefers light mode
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // Read from local storage
     function updateToggleUI(day) {
         // 滑块宽20px，按钮宽72px，内边距4px，滑块初始left:4px
         // 右侧极限位置 = 72 - 4 - 20 = 48px
@@ -564,14 +569,28 @@
             label.style.color = '#3b82f6';
         }
     }
-    if (localStorage.getItem('themeMode') === 'day') {
+
+    // Initialize theme based on localStorage or system preference
+    const savedTheme = localStorage.getItem('themeMode');
+    if (savedTheme === 'day') {
         setDayMode();
         isDay = true;
         updateToggleUI(true);
-    } else {
+    } else if (savedTheme === 'night') {
         setNightMode();
         isDay = false;
         updateToggleUI(false);
+    } else {
+        // No saved preference, use system preference
+        if (prefersDarkMode) {
+            setNightMode();
+            isDay = false;
+            updateToggleUI(false);
+        } else {
+            setDayMode();
+            isDay = true;
+            updateToggleUI(true);
+        }
     }
     themeToggle.addEventListener('click', () => {
         isDay = !isDay;
