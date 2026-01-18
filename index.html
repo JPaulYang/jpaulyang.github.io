@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学术主页 - 计算机科学</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Crimson+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0a0e17;
+            --secondary-bg: #111827;
+            --accent: #3b82f6;
+            --accent-soft: #60a5fa;
+            --text-primary: #e5e7eb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border: #1f2937;
+            --spacing: clamp(1rem, 3vw, 2rem);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* 网格背景效果 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--spacing);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 头部区域 */
+        header {
+            padding: 5rem 0 4rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        h1 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+        }
+
+        .bio {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            line-height: 1.8;
+        }
+
+        /* 分区块样式 */
+        section {
+            margin-bottom: 5rem;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        section:nth-child(2) { animation-delay: 0.1s; }
+        section:nth-child(3) { animation-delay: 0.2s; }
+        section:nth-child(4) { animation-delay: 0.3s; }
+        section:nth-child(5) { animation-delay: 0.4s; }
+
+        h2 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        /* 研究方向 */
+        .research-areas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .research-card {
+            padding: 2rem;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--accent);
+            transition: height 0.3s ease;
+        }
+
+        .research-card:hover::before {
+            height: 100%;
+        }
+
+        .research-card:hover {
+            border-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .research-card h3 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .research-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* 时间线样式 */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3rem;
+            top: 8px;
+            width: 9px;
+            height: 9px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 2px solid var(--primary-bg);
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+
+        .timeline-year {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-soft);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .timeline-org {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* 发表列表 */
+        .publication-list {
+            list-style: none;
+        }
+
+        .publication-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        .publication-item:last-child {
+            border-bottom: none;
+        }
+
+        .publication-item:hover {
+            padding-left: 1rem;
+        }
+
+        .pub-title {
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .pub-authors {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.3rem;
+        }
+
+        .pub-venue {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-soft);
+        }
+
+        .pub-link {
+            display: inline-block;
+            margin-top: 0.5rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .pub-link:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        /* 联系方式 */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .contact-icon {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-value {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .contact-value a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-value a:hover {
+            color: var(--accent-soft);
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            margin-top: 6rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 0 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .timeline-item::before {
+                left: -2rem;
+            }
+
+            .research-areas {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 技能标签 */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--accent-soft);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div style="position: fixed; top: 2rem; right: 2rem; z-index: 10; display: flex; flex-direction: column; align-items: center;">
+        <span id="toggle-title" style="font-family: 'IBM Plex Mono', monospace; font-size: 0.92rem; color: var(--accent); font-weight: 600; margin-bottom: 4px; letter-spacing: 0.02em;">Night Mode</span>
+        <button id="theme-toggle" aria-label="切换日夜模式" style="background: var(--secondary-bg); border: 1px solid var(--border); border-radius: 999px; width: 72px; height: 28px; display: flex; align-items: center; justify-content: flex-start; padding: 0 4px; cursor: pointer; transition: background 0.3s; box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04); position: relative;">
+            <span id="toggle-track" style="position: absolute; left: 0; top: 0; width: 72px; height: 28px; background: rgba(59,130,246,0.10); border-radius: 999px; z-index: 0;"></span>
+            <span id="toggle-slider" style="position: absolute; left: 4px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; background: var(--accent); border-radius: 50%; display: inline-block; transition: transform 0.3s; box-shadow: 0 1px 4px 0 rgba(59,130,246,0.10); z-index: 1;"></span>
+        </button>
+        <span id="toggle-label" style="margin-top: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 0.92rem; color: var(--accent); font-weight: 500; text-align: center; width: 72px;">on</span>
+    </div>
+    <div class="container">
+        <header>
+            <h1>Jiannan Yang</h1>
+            <div class="subtitle">Computer Science Researcher / PhD Candidate</div>
+            <p class="bio">
+                专注于机器学习与分布式系统的交叉研究，致力于构建高效可靠的大规模智能系统。目前在某某大学攻读博士学位，研究方向包括联邦学习、系统优化与隐私计算。
+            </p>
+        </header>
+
+        <section>
+            <h2>研究方向</h2>
+            <div class="research-areas">
+                <div class="research-card">
+                    <h3>机器学习系统</h3>
+                    <p>分布式训练框架、模型压缩与加速、边缘计算</p>
+                </div>
+                <div class="research-card">
+                    <h3>联邦学习</h3>
+                    <p>隐私保护、异构设备协同、通信效率优化</p>
+                </div>
+                <div class="research-card">
+                    <h3>系统安全</h3>
+                    <p>可信计算、差分隐私、对抗鲁棒性</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>教育背景</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2021 - 至今</div>
+                    <div class="timeline-title">计算机科学 博士</div>
+                    <div class="timeline-org">某某大学 计算机学院</div>
+                    <div class="timeline-desc">导师：李教授 | GPA: 3.9/4.0</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2017 - 2021</div>
+                    <div class="timeline-title">计算机科学与技术 学士</div>
+                    <div class="timeline-org">某某大学</div>
+                    <div class="timeline-desc">优秀毕业生 | GPA: 3.8/4.0</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>代表论文</h2>
+            <ul class="publication-list">
+                <li class="publication-item">
+                    <div class="pub-title">Efficient Federated Learning with Adaptive Communication Strategies</div>
+                    <div class="pub-authors"><strong>Zhang San</strong>, Li Si, Wang Wu</div>
+                    <div class="pub-venue">NeurIPS 2024</div>
+                    <a href="#" class="pub-link">[PDF]</a>
+                    <a href="#" class="pub-link">[Code]</a>
+                </li>
+                <li class="publication-item">
+                    <div class="pub-title">Privacy-Preserving Distributed Machine Learning: A Survey</div>
+                    <div class="pub-authors"><strong>Zhang San</strong>, Zhao Liu</div>
+                    <div class="pub-venue">IEEE TPDS 2023</div>
+                    <a href="#" class="pub-link">[PDF]</a>
+                </li>
+                <li class="publication-item">
+                    <div class="pub-title">Accelerating Deep Learning on Edge Devices via Model Compression</div>
+                    <div class="pub-authors">Li Si, <strong>Zhang San</strong>, Chen Qi</div>
+                    <div class="pub-venue">ICML 2023</div>
+                    <a href="#" class="pub-link">[PDF]</a>
+                    <a href="#" class="pub-link">[Code]</a>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>技能</h2>
+            <div class="skills">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">PyTorch</span>
+                <span class="skill-tag">TensorFlow</span>
+                <span class="skill-tag">C++</span>
+                <span class="skill-tag">Distributed Systems</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">Kubernetes</span>
+                <span class="skill-tag">Linux</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>联系方式</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">@</div>
+                    <div class="contact-info">
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value"><a href="mailto:zhangsan@university.edu">zhangsan@university.edu</a></div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">#</div>
+                    <div class="contact-info">
+                        <div class="contact-label">Google Scholar</div>
+                        <div class="contact-value"><a href="#" target="_blank">学术主页</a></div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">&lt;/&gt;</div>
+                    <div class="contact-info">
+                        <div class="contact-label">GitHub</div>
+                        <div class="contact-value"><a href="#" target="_blank">@zhangsan</a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            最后更新：2026年1月 | 使用现代Web技术构建
+        </footer>
+    <script>
+    // 主题切换逻辑
+    const themeToggle = document.getElementById('theme-toggle');
+    const slider = document.getElementById('toggle-slider');
+    const label = document.getElementById('toggle-label');
+    let isDay = false;
+    // 读取本地存储
+    function updateToggleUI(day) {
+        // 滑块宽20px，按钮宽72px，内边距4px，滑块初始left:4px
+        // 右侧极限位置 = 72 - 4 - 20 = 48px
+        if(day) {
+            slider.style.transform = 'translateX(44px) translateY(-50%)'; // 4+44=48, 48+20=68, 离右边4px
+            label.textContent = 'off';
+            label.style.color = '#fbbf24';
+        } else {
+            slider.style.transform = 'translateX(0) translateY(-50%)';
+            label.textContent = 'on';
+            label.style.color = '#3b82f6';
+        }
+    }
+    if (localStorage.getItem('themeMode') === 'day') {
+        setDayMode();
+        isDay = true;
+        updateToggleUI(true);
+    } else {
+        setNightMode();
+        isDay = false;
+        updateToggleUI(false);
+    }
+    themeToggle.addEventListener('click', () => {
+        isDay = !isDay;
+        if (isDay) {
+            setDayMode();
+            localStorage.setItem('themeMode', 'day');
+            updateToggleUI(true);
+        } else {
+            setNightMode();
+            localStorage.setItem('themeMode', 'night');
+            updateToggleUI(false);
+        }
+    });
+    function setDayMode() {
+        document.documentElement.style.setProperty('--primary-bg', '#f5f7fa');
+        document.documentElement.style.setProperty('--secondary-bg', '#ffffff');
+        document.documentElement.style.setProperty('--accent', '#fbbf24');
+        document.documentElement.style.setProperty('--accent-soft', '#fde68a');
+        document.documentElement.style.setProperty('--text-primary', '#22223b');
+        document.documentElement.style.setProperty('--text-secondary', '#4b5563');
+        document.documentElement.style.setProperty('--text-muted', '#6b7280');
+        document.documentElement.style.setProperty('--border', '#e5e7eb');
+    }
+    function setNightMode() {
+        document.documentElement.style.setProperty('--primary-bg', '#0a0e17');
+        document.documentElement.style.setProperty('--secondary-bg', '#111827');
+        document.documentElement.style.setProperty('--accent', '#3b82f6');
+        document.documentElement.style.setProperty('--accent-soft', '#60a5fa');
+        document.documentElement.style.setProperty('--text-primary', '#e5e7eb');
+        document.documentElement.style.setProperty('--text-secondary', '#9ca3af');
+        document.documentElement.style.setProperty('--text-muted', '#6b7280');
+        document.documentElement.style.setProperty('--border', '#1f2937');
+    }
+    </script>
+    </div>
+</body>
+</html>
