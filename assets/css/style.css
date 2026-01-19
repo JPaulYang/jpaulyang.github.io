@@ -598,4 +598,11 @@ footer {
     .publication-list.two-column {
         grid-template-columns: 1fr;
     }
+    /* fix mobile publication-item border display logic */
+    .publication-list.two-column .publication-item {
+        border-bottom: 1px solid var(--border) !important;
+    }
+    .publication-list.two-column .publication-item:last-child {
+        border-bottom: none !important;
+    }
 }
