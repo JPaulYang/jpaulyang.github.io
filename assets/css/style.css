@@ -308,13 +308,13 @@ h2::after {
 /* Timeline styles */
 .timeline {
     position: relative;
-    padding-left: 3rem;
+    padding-left: 2rem;
 }
 
 .timeline::before {
     content: '';
     position: absolute;
-    left: 0;
+    left: 6.5px;
     top: 8px;
     bottom: 0;
     width: 1px;
@@ -329,7 +329,7 @@ h2::after {
 .timeline-item::before {
     content: '';
     position: absolute;
-    left: -3rem;
+    left: -2rem;
     top: 8px;
     width: 9px;
     height: 9px;
@@ -357,6 +357,16 @@ h2::after {
     font-size: 0.95rem;
     color: var(--text-secondary);
     margin-bottom: 0.5rem;
+}
+
+.timeline-org a {
+    color: inherit;
+    text-decoration: underline;
+    transition: opacity 0.2s;
+}
+
+.timeline-org a:hover {
+    opacity: 0.7;
 }
 
 .timeline-desc {
@@ -556,11 +566,15 @@ footer {
     }
 
     .timeline {
-        padding-left: 2rem;
+        padding-left: 1.5rem;
+    }
+
+    .timeline::before {
+        left: 4.5px;
     }
 
     .timeline-item::before {
-        left: -2rem;
+        left: -1.5rem;
     }
 
     .research-areas {
