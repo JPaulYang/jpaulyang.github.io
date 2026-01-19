@@ -380,6 +380,12 @@ h2::after {
     list-style: none;
 }
 
+.publication-list.two-column {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
 .publication-item {
     padding: 1.5rem 0;
     border-bottom: 1px solid var(--border);
@@ -387,6 +393,10 @@ h2::after {
 }
 
 .publication-item:last-child {
+    border-bottom: none;
+}
+
+.publication-list.two-column .publication-item:nth-last-child(-n+2) {
     border-bottom: none;
 }
 
@@ -582,6 +592,10 @@ footer {
     }
 
     .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .publication-list.two-column {
         grid-template-columns: 1fr;
     }
 }

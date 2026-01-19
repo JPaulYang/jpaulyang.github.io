@@ -44,7 +44,7 @@ function updateToggleUI(day) {
     if (day) {
         slider.style.transform = 'translateX(20px) translateY(-50%)';
         label.textContent = 'off';
-        label.style.color = '#fbbf24';
+        label.style.color = '#fab300';
     } else {
         slider.style.transform = 'translateX(0) translateY(-50%)';
         label.textContent = 'on';
