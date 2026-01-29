@@ -1,14 +1,4 @@
-// Update last updated date dynamically
-function initializeDate() {
-    const lastUpdated = document.getElementById('last-updated');
-    if (!lastUpdated) return;
-
-    const now = new Date();
-    const months = ['January', 'February', 'March', 'April', 'May', 'June',
-                    'July', 'August', 'September', 'October', 'November', 'December'];
-    const formattedDate = `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
-    lastUpdated.textContent = `Last updated: ${formattedDate}`;
-}
+// Date is now static in HTML - update manually when needed
 
 // Theme toggle functions
 function setDayMode() {
@@ -115,7 +105,6 @@ function setActiveNav() {
 
 // Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    initializeDate();
     initializeThemeToggle();
     setActiveNav();
 });
