@@ -1,4 +1,12 @@
-// Date is now static in HTML - update manually when needed
+// Single source of truth for the "Last updated" date across all pages.
+// Edit this ONE line — it updates index.html, reading.html, and teaching.html.
+const LAST_UPDATED = 'July 6, 2026';
+
+function setLastUpdated() {
+    document.querySelectorAll('#last-updated').forEach(el => {
+        el.textContent = 'Last updated: ' + LAST_UPDATED;
+    });
+}
 
 // Theme toggle functions
 function setDayMode() {
@@ -107,4 +115,5 @@ function setActiveNav() {
 document.addEventListener('DOMContentLoaded', () => {
     initializeThemeToggle();
     setActiveNav();
+    setLastUpdated();
 });
