@@ -1,6 +1,6 @@
 // Single source of truth for the "Last updated" date across all pages.
 // Edit this ONE line — it updates index.html, reading.html, and teaching.html.
-const LAST_UPDATED = 'July 6, 2026';
+const LAST_UPDATED = 'October 2, 2026';
 
 function setLastUpdated() {
     document.querySelectorAll('#last-updated').forEach(el => {
